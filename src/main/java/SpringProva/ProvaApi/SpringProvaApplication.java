@@ -1,4 +1,4 @@
-package SpringProva.SpringProva;
+package SpringProva.ProvaApi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

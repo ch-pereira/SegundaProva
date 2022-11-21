@@ -1,4 +1,4 @@
-package SpringProva.SpringProva;
+package SpringProva.ProvaApi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
