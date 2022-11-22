@@ -23,7 +23,7 @@ public class Pedido {
     public Pedido(){
     }
 
-    public Pedido(Long id, String endereco, String cep, Integer numero, String formaPagamento, Integer parcela, Double valorTotal, List<Itens> itens) {
+    public Pedido(String endereco, String cep, Integer numero, String formaPagamento, Integer parcela, Double valorTotal, List<Itens> itens) {
         this.endereco = endereco;
         this.cep = cep;
         this.numero = numero;
@@ -77,12 +77,12 @@ public class Pedido {
         this.parcela = parcela;
     }
 
-    public Double getValorTotal() {
+    public Double getValorTotal(Double total) {
         return valorTotal;
     }
 
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
+    public Double setValorTotal() {
+        return valorTotal;
     }
 
     public List<Itens> getItens() {
