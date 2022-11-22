@@ -1,8 +1,8 @@
 package SpringProva.ProvaApi.controller;
 
+import SpringProva.ProvaApi.entity.Itens;
 import SpringProva.ProvaApi.entity.Pedido;
 import SpringProva.ProvaApi.repository.PedidoRepository;
-import org.aspectj.apache.bcel.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +19,10 @@ public class Controller {
     @PostMapping
     @ResponseBody
     public Pedido create(@RequestBody Pedido pedido){
+        for (Itens i : pedido.getItens()){
+            i.setPrecoTotal(i.getPrecoIndividual()* i.getQuantidade());
+        }
+
         Pedido pedidoSaved = pedidoRepository.save(pedido);
         return pedidoSaved;
     }
@@ -30,7 +34,7 @@ public class Controller {
         return pedidoReturned;
     }
 
-    @GetMapping
+    @GetMapping("todos")
     public List<Pedido> getAllPedido(){
         return pedidoRepository.findAll();
     }
@@ -40,21 +44,21 @@ public class Controller {
         Optional<Pedido> clienteOptional = pedidoRepository.findById(id);
         if (clienteOptional.isPresent()){
             pedidoRepository.deleteById(id);
-            return "Cliente de id " + id + " foi deletado com sucesso!";
+            return "O pedido de id " + id + " foi cancelado com sucesso!";
         }else {
-            return "Cliente inexistente!";
+            return "Pedido inexistente!";
         }
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("update/{parcela}/{id}")
     public String updatePedidoById(@PathVariable Long id, String novoNome){
         Optional<Pedido> pedidoOptional = pedidoRepository.findById(id);
         if (pedidoOptional.isPresent()){
             Pedido p = pedidoOptional.get();
             pedidoRepository.save(p);
-            return "Cliente de id "+ id + " salvo com sucesso!";
+            return "A parcela de id "+ id + " foi alterado com sucesso! Assim o valor total é de";
         }else {
-            return "Cliente inexistente!";
+            return "Parcela inexistente!";
         }
     }
 }
